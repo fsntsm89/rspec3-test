@@ -1,13 +1,7 @@
 require_relative 'message_filter'
 
-describe MessageFilter do
-  it 'detects message with NG word' do
-    filter = MessageFilter.new('foo')
-    expect(filter.detect?('hello from foo')).to eq true
-  end
-
-  it 'does not detect message without NG word' do
-    filter = MessageFilter.new('foo')
-    expect(filter.detect?('hello, world!')).to eq false
-  end
+describe MessageFilter, 'with argument "foo"' do
+  subject {MessageFilter.new('foo')}
+  it {is_expected.to be_detect('hello from foo')}
+  it {is_expected.not_to be_detect('hello, world!')}
 end
